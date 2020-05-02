@@ -3,26 +3,37 @@
   height: 100%;
   padding: 10px;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 .App > div.ag-theme-balham {
-  flex: 1
+  flex: 1;
 }
 
-.TypeChoice {
-  margin-bottom: 10px;
+.settings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RendererTypeChoice {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
-.TypeChoice > span {
+.RendererTypeChoice > span {
   font-weight: bold;
   margin-right: 20px;
 }
 
-.TypeChoice > label {
+.RendererTypeChoice > label {
+  display: inline-flex;
+  align-items: center;
   margin-right: 10px;
+}
+
+.StaticMarkupChoice > label {
+  font-weight: bold;
   display: inline-flex;
   align-items: center;
 }

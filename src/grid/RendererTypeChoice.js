@@ -7,32 +7,32 @@ import {
     REACT_FUNCTION
 } from './renderers/rendererTypeNames';
 
-const TypeChoice = props => {
+const RendererTypeChoice = props => {
     return (
-        <div className="TypeChoice">
+        <div className="RendererTypeChoice">
             <span>Cell renderer type:</span>
             <label>
                 <input type="radio" name="rendererType" value={NO_RENDERER}
-                    onChange={props.onChange} checked={props.type === NO_RENDERER} />
+                    onChange={props.onChange} defaultChecked />
                 Not set
              </label>
             <label>
                 <input type="radio" name="rendererType" value={VANILLA_FUNCTION}
-                    onChange={props.onChange} checked={props.type === VANILLA_FUNCTION} />
+                    onChange={props.onChange}  />
                 Vanilla JS function
             </label>
             <label>
                 <input type="radio" name="rendererType" value={REACT_CLASS}
-                    onChange={props.onChange} checked={props.type === REACT_CLASS} />
+                    onChange={props.onChange}  />
                 React class component
             </label>
             <label>
                 <input type="radio" name="rendererType" value={REACT_FUNCTION}
-                    onChange={props.onChange} checked={props.type === REACT_FUNCTION} />
+                    onChange={props.onChange}  />
                 React function component
             </label>
         </div>
     );
 };
 
-export default TypeChoice;
+export default RendererTypeChoice;

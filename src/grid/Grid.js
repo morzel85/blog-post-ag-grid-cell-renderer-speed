@@ -13,7 +13,8 @@ import vanillaFunctionRenderer from './renderers/vanillaFunctionRenderer';
 import ReactClassRenderer from './renderers/ReactClassRenderer';
 import ReactFunctionRenderer from './renderers/ReactFunctionRenderer';
 
-import TypeChoice from './TypeChoice';
+import RendererTypeChoice from './RendererTypeChoice';
+import StaticMarkupChoice from './StaticMarkupChoice';
 
 class Grid extends Component {
     constructor(props) {
@@ -22,22 +23,9 @@ class Grid extends Component {
         const [columnDefs, rowData] = generateColumnsAndRows(100, 100);
 
         this.state = {
-            gridOptions: {
-                defaultColDef: {
-                    width: 90
-                },
-                columnDefs,
-                rowData,
-                components: {
-                    VANILLA_FUNCTION: vanillaFunctionRenderer
-                },
-                frameworkComponents: {
-                    REACT_CLASS: ReactClassRenderer,
-                    REACT_FUNCTION: ReactFunctionRenderer
-                },
-                onGridReady: this.handleGridReady
-            },
-            rendererType: NO_RENDERER
+            columnDefs,
+            rowData,
+            disableStaticMarkup: false
         }
     }
 
@@ -53,25 +41,49 @@ class Grid extends Component {
         this.gridColumnApi.setColumnsVisible(columnsToShow, true);
     };
 
-    handleGridReady = params => {        
+    handleGridReady = params => {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
     };
 
-    handleRenererTypeChange = event => {
-        this.setState({
-            rendererType: event.target.value
-        });
-
+    handleRendererTypeChange = event => {
         this.setColumnsVisiblity(event.target.value);
     };
 
-    render() {       
+    handleDisableStaticMarkupOptionChange = event => {
+        this.setState({
+            disableStaticMarkup: event.target.checked
+        });
+    };
+
+    render() {
         return (
             <>
-                <TypeChoice type={this.state.rendererType} onChange={this.handleRenererTypeChange} />
-                <div className="Grid ag-theme-balham">
-                    <AgGridReact gridOptions={this.state.gridOptions} />
+                <div className="settings">
+                    <RendererTypeChoice
+                        type={this.state.rendererType}
+                        onChange={this.handleRendererTypeChange} />
+                    <StaticMarkupChoice
+                        type={this.state.disableStaticMarkup}
+                        onChange={this.handleDisableStaticMarkupOptionChange} />
+                </div>
+                <div className="ag-theme-balham">
+                    <AgGridReact
+                        defaultColDef={{
+                            width: 90
+                        }}
+                        components={{
+                            VANILLA_FUNCTION: vanillaFunctionRenderer
+                        }}
+                        frameworkComponents={{
+                            REACT_CLASS: ReactClassRenderer,
+                            REACT_FUNCTION: ReactFunctionRenderer
+                        }}
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.state.rowData}
+                        disableStaticMarkup={this.state.disableStaticMarkup}
+                        onGridReady={this.handleGridReady}
+                    />
                 </div>
             </>
         );
