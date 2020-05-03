@@ -1,4 +1,0 @@
-export const NO_RENDERER = 'NO_RENDERER';
-export const VANILLA_FUNCTION = 'VANILLA_FUNCTION';
-export const REACT_CLASS = 'REACT_CLASS';
-export const REACT_FUNCTION = 'REACT_FUNCTION';

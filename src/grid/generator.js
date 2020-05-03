@@ -1,12 +1,6 @@
-import {
-    VANILLA_FUNCTION,
-    REACT_CLASS,
-    REACT_FUNCTION
-} from './renderers/rendererTypeNames';
-
 const generateColumnsAndRows = (columnsPerTypeCount, rowsCount) => {
     const columnDefs = [];
-    const rowData = []
+    const rowData = [];
 
     for (let i = 0; i < columnsPerTypeCount; i++) {
         columnDefs.push({
@@ -15,17 +9,17 @@ const generateColumnsAndRows = (columnsPerTypeCount, rowsCount) => {
         }, {
             field: 'field_vf_' + i,
             headerName: 'Col VF ' + i,
-            cellRenderer: VANILLA_FUNCTION,
+            cellRenderer: 'vanillaFunction',
             hide: true
         }, {
             field: 'field_rc_' + i,
             headerName: 'Col RC ' + i,
-            cellRenderer: REACT_CLASS,
+            cellRenderer: 'reactClass',
             hide: true
         }, {
             field: 'field_rf_' + i,
             headerName: 'Col RF ' + i,
-            cellRenderer: REACT_FUNCTION,
+            cellRenderer: 'reactFunction',
             hide: true
         });
     }

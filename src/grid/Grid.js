@@ -3,10 +3,6 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
-import {
-    NO_RENDERER,
-} from './renderers/rendererTypeNames';
-
 import generateColumnsAndRows from './generator';
 
 import vanillaFunctionRenderer from './renderers/vanillaFunctionRenderer';
@@ -33,28 +29,25 @@ class Grid extends Component {
         const allColumns = this.gridColumnApi.getAllColumns();
 
         const columnsToHide = allColumns.filter(c => c.colDef.cellRenderer !== rendererType);
-        const columnsToShow = rendererType === NO_RENDERER ?
-            allColumns.filter(c => c.colDef.cellRenderer === undefined) :
-            allColumns.filter(c => c.colDef.cellRenderer === rendererType);
+        const columnsToShow = allColumns.filter(c => c.colDef.cellRenderer === rendererType);
 
         this.gridColumnApi.setColumnsVisible(columnsToHide, false);
         this.gridColumnApi.setColumnsVisible(columnsToShow, true);
-    };
+    }
 
     handleGridReady = params => {
-        this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-    };
+    }
 
     handleRendererTypeChange = event => {
-        this.setColumnsVisiblity(event.target.value);
-    };
+        this.setColumnsVisiblity(event.target.value || undefined);
+    }
 
     handleDisableStaticMarkupOptionChange = event => {
         this.setState({
             disableStaticMarkup: event.target.checked
         });
-    };
+    }
 
     render() {
         return (
@@ -73,11 +66,11 @@ class Grid extends Component {
                             width: 90
                         }}
                         components={{
-                            VANILLA_FUNCTION: vanillaFunctionRenderer
+                            vanillaFunction: vanillaFunctionRenderer
                         }}
                         frameworkComponents={{
-                            REACT_CLASS: ReactClassRenderer,
-                            REACT_FUNCTION: ReactFunctionRenderer
+                            reactClass: ReactClassRenderer,
+                            reactFunction: ReactFunctionRenderer
                         }}
                         columnDefs={this.state.columnDefs}
                         rowData={this.state.rowData}

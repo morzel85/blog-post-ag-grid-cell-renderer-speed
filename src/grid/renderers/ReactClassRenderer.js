@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class ReactClassRenderer extends Component {
-    render() {        
+    render() {
         return (
             <span>RC: {this.props.value}</span>
         );
