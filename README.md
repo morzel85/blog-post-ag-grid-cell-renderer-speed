@@ -1,4 +1,4 @@
-# This is sample code for blog post!
+# This is sample code for a blog post!
 
 Read the post on my blog: https://en.morzel.net/post/resizing-all-ag-gird-react-columns
 
